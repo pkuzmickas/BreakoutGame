@@ -10,4 +10,6 @@ private:
 public:
 	Graphics(SDL_Renderer* renderer);
 	void draw();
+	void addToDraw(GameObject* gameObject);
+	bool removeFromDraw(GameObject* gameObject);
 };
