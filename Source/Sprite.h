@@ -9,7 +9,7 @@ private:
 	SDL_Rect* srcRect;
 	SDL_Texture* texture;
 public:
-	Sprite(SDL_Rect posRect, SDL_Rect* srcRect, SDL_Texture* texture);
+	Sprite(SDL_Rect* srcRect, SDL_Texture* texture);
 	SDL_Rect* getSrcRect();
 	SDL_Texture* getTexture();
 	~Sprite();

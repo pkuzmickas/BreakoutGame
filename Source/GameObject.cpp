@@ -1,15 +1,23 @@
 #include "GameObject.h"
 
-GameObject::GameObject(SDL_Rect posRect, Sprite * sprite) {
+void GameObject::init(std::string name, SDL_Rect* posRect, Sprite * sprite) {
+	this->name = name;
 	this->posRect = posRect;
 	this->sprite = sprite;
 }
 
-GameObject::~GameObject() {
-	delete sprite;
+GameObject::GameObject(std::string name, SDL_Rect* posRect, Sprite * sprite) {
+	init(name, posRect, sprite);
 }
 
-SDL_Rect GameObject::getPosRect() {
+GameObject::~GameObject() {
+	delete sprite;
+	sprite = NULL;
+	delete posRect;
+	posRect = NULL;
+}
+
+SDL_Rect* GameObject::getPosRect() {
 	return posRect;
 }
 

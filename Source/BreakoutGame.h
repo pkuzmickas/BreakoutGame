@@ -9,7 +9,9 @@ public:
 	void update();
 private:
 	SDL_Renderer* renderer = NULL;
-	int runTime, deltaTime;
+	Uint32 runTime;
+	float deltaTime;
 	bool gameRunning = false;
 	Graphics* graphics;
+	class Paddle* paddle = NULL;
 };

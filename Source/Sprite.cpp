@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-Sprite::Sprite(SDL_Rect posRect, SDL_Rect* srcRect, SDL_Texture * texture) {
+Sprite::Sprite(SDL_Rect* srcRect, SDL_Texture * texture) {
 	this->srcRect = srcRect;
 	this->texture = texture;
 }
