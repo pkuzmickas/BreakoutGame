@@ -11,5 +11,11 @@ public:
 	}
 	static const int SCREEN_WIDTH = 800;
 	static const int SCREEN_HEIGHT = 600;
-
+	static const int TILE_WIDTH = 100;
+	static const int TILE_HEIGHT = 25;
+	static const int PADDLE_WIDTH = 150;
+	static const int PADDLE_HEIGHT = 25;
+	static const int SPACE_TOP = 75;
+	static const int MAX_COLUMNS = 8;
+	static const int MAX_ROWS = 6;
 };

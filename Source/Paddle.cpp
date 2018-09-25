@@ -3,13 +3,13 @@
 #include <iostream>
 Paddle::Paddle(SDL_Renderer* renderer) {
 	name = "Paddle";
-	posX = (float)(Globals::SCREEN_WIDTH / 2 - width / 2);
-	posY = (float)(Globals::SCREEN_HEIGHT - height);
-	SDL_Rect* posRect = new SDL_Rect();
+	posX = (float)(Globals::SCREEN_WIDTH / 2 - Globals::PADDLE_WIDTH / 2);
+	posY = (float)(Globals::SCREEN_HEIGHT - Globals::PADDLE_HEIGHT*2);
+	posRect = new SDL_Rect();
 	posRect->x = (int)posX;
 	posRect->y = (int)posY;
-	posRect->h = height;
-	posRect->w = width;
+	posRect->h = Globals::PADDLE_HEIGHT;
+	posRect->w = Globals::PADDLE_WIDTH;
 	
 	init(name, posRect, new Sprite(NULL, IMG_LoadTexture(renderer, imgPath.c_str())));
 }

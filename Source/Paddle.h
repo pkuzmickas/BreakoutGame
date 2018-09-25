@@ -2,8 +2,6 @@
 #include "GameObject.h"
 class Paddle : public GameObject {
 private:
-	int width = 100;
-	int height = 25;
 	// These two get set in the constructor
 	float posX = 0;
 	float posY = 0;

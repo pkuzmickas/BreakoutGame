@@ -25,14 +25,17 @@
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Paddle.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
+    <ClCompile Include="Source\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Ball.h" />
     <ClInclude Include="Source\BreakoutGame.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Globals.h" />
     <ClInclude Include="Source\Graphics.h" />
     <ClInclude Include="Source\Paddle.h" />
     <ClInclude Include="Source\Sprite.h" />
+    <ClInclude Include="Source\Tile.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
