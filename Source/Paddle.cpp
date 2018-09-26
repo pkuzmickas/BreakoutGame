@@ -43,11 +43,17 @@ void Paddle::update(float deltaTime) {
 		}
 	}
 
+	float velocity = movementSpeed * deltaTime;
+
 	if (movingRight) {
-		posX += movementSpeed * deltaTime;
+		if (posX + velocity <= Globals::SCREEN_WIDTH - Globals::PADDLE_WIDTH) {
+			posX += velocity;
+		}
 	}
 	else if (movingLeft) {
-		posX -= movementSpeed * deltaTime;
+		if (posX - velocity >= 0) {
+			posX -= velocity;
+		}
 	}
 
 	posRect->x = (int)posX;
