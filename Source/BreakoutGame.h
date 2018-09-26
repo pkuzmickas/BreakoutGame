@@ -18,5 +18,23 @@ private:
 	class Physics* physics = NULL;
 	vector<class Tile*> tiles;
 
+	int ballsLeft;
+	int score = 0;
+
 	void loadTilesFromFile(std::string path);
+	void checkTiles();
+	void checkBall();
+	void restartGame();
+	SDL_Texture* createTextTexture(int fontSize, std::string text);
+	GameObject* createText(SDL_Texture* textTexture, SDL_Rect* posRect);
+
+	enum GameState {
+		MENU,
+		PLAYING
+	};
+
+	GameState gameState = MENU;
+	GameObject* menuScreen = NULL;
+	GameObject* ballCount = NULL;
+	GameObject* scoreCount = NULL;
 };

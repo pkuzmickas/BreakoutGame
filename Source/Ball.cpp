@@ -2,6 +2,7 @@
 #include "Paddle.h"
 #include "Globals.h"
 #include "Physics.h"
+#include "Tile.h"
 #include <math.h>
 #include <iostream>
 using namespace std;
@@ -20,13 +21,14 @@ Ball::Ball(SDL_Renderer * renderer, Paddle* paddle, Physics* physics) {
 	}
 	this->paddle = paddle;
 	this->physics = physics;
+	ballsLeft = Globals::MAX_BALLS;
 	name = "Ball";
 	posRect = new SDL_Rect();
 	posRect->h = Globals::BALL_SIZE;
 	posRect->w = Globals::BALL_SIZE;
 	resetBallLocation();
 
-	init(name, posRect, new Sprite(NULL, IMG_LoadTexture(renderer, imgPath.c_str())));
+	init(name, posRect, new Sprite(NULL, IMG_LoadTexture(renderer, BALL_FILE_PATH)));
 }
 
 void Ball::update(float deltaTime) {
@@ -37,21 +39,31 @@ void Ball::update(float deltaTime) {
 		switch (e.type) {
 
 		case SDL_MOUSEBUTTONDOWN: {
-			if (state == NOT_LAUNCHED) {
-				state = LAUNCHED;
+			if (!ballLaunched) {
+				ballLaunched = true;
 				velX = speed * 0.3;
 				velY = -speed * 0.7;
 			}
 		}
-								  break;
+			break;
+
+		case SDL_KEYDOWN: {
+			if (e.key.keysym.sym == SDLK_SPACE && !ballLaunched) {
+				ballLaunched = true;
+				velX = speed * 0.3;
+				velY = -speed * 0.7;
+			}
+
+		}
+			break;
 		}
 	}
 
 
-	if (state == NOT_LAUNCHED) {
+	if (!ballLaunched) {
 		resetBallLocation();
 	}
-	else if (state == LAUNCHED) {
+	else if (ballLaunched) {
 		// Change the ball position
 		posX += velX * deltaTime;
 		posY += velY * deltaTime;
@@ -86,6 +98,14 @@ void Ball::update(float deltaTime) {
 			}
 			else if (colliderName == "WallUp" || colliderName == "Tile") {
 				velY *= -1;
+				if (colliderName == "Tile") {
+					((Tile*)collision)->tileHit();
+				}
+			}
+			else if (colliderName == "WallDown") {
+				ballsLeft--;
+				restartBall();
+				// out of bounds flag
 			}
 
 		}
@@ -93,6 +113,14 @@ void Ball::update(float deltaTime) {
 
 	}
 
+}
+
+void Ball::restartBall() {
+	ballLaunched = false;
+}
+
+int Ball::getBallsLeft() {
+	return ballsLeft;
 }
 
 

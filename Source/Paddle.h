@@ -5,7 +5,6 @@ private:
 	// These two get set in the constructor
 	float posX = 0;
 	float posY = 0;
-	std::string imgPath = "Assets/paddle.png";
 
 	bool movingLeft = false;
 	bool movingRight = false;

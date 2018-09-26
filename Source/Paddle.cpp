@@ -4,14 +4,14 @@
 Paddle::Paddle(SDL_Renderer* renderer) {
 	name = "Paddle";
 	posX = (float)(Globals::SCREEN_WIDTH / 2 - Globals::PADDLE_WIDTH / 2);
-	posY = (float)(Globals::SCREEN_HEIGHT - Globals::PADDLE_HEIGHT*2);
+	posY = (float)(Globals::SCREEN_HEIGHT - Globals::BOTTOM_DISTANCE);
 	posRect = new SDL_Rect();
 	posRect->x = (int)posX;
 	posRect->y = (int)posY;
 	posRect->h = Globals::PADDLE_HEIGHT;
 	posRect->w = Globals::PADDLE_WIDTH;
 	
-	init(name, posRect, new Sprite(NULL, IMG_LoadTexture(renderer, imgPath.c_str())));
+	init(name, posRect, new Sprite(NULL, IMG_LoadTexture(renderer, PADDLE_FILE_PATH)));
 }
 
 void Paddle::update(float deltaTime) {
