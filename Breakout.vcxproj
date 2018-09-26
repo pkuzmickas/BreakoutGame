@@ -35,6 +35,7 @@
     <ClInclude Include="Source\Globals.h" />
     <ClInclude Include="Source\Graphics.h" />
     <ClInclude Include="Source\Paddle.h" />
+    <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Sprite.h" />
     <ClInclude Include="Source\Tile.h" />
   </ItemGroup>

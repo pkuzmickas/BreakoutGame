@@ -65,5 +65,8 @@
     <ClInclude Include="Source\Ball.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Physics.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
