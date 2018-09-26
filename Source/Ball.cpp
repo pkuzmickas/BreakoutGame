@@ -43,7 +43,7 @@ void Ball::update(float deltaTime) {
 				velY = -speed * 0.7;
 			}
 		}
-			break;
+								  break;
 		}
 	}
 
@@ -52,24 +52,45 @@ void Ball::update(float deltaTime) {
 		resetBallLocation();
 	}
 	else if (state == LAUNCHED) {
+		// Change the ball position
 		posX += velX * deltaTime;
 		posY += velY * deltaTime;
 		posRect->x = (int)posX;
 		posRect->y = (int)posY;
+
 		auto collision = physics->checkCollision(this);
 		if (collision) {
+			// If collided, get the ball position back to where it was
+			posX -= velX * deltaTime;
+			posY -= velY * deltaTime;
+			posRect->x = (int)posX;
+			posRect->y = (int)posY;
+
 			SDL_Rect* colliderPos = collision->getPosRect();
-			// Location of the ball relative to the paddle
-			// PADDLE CENTRE X - BALL CENTRE X
-			float relativeIntersectX = (colliderPos->x + (colliderPos->w / 2)) - (posRect->x + posRect->w / 2);
-			// Normalizing the position (-1 -> 1)
-			float normalizedRelativeIntersectionX = (relativeIntersectX / (colliderPos->w / 2));
-			// Getting the new bounce angle by multiplying the position of the ball by the maximum possible value
-			float bounceAngle = normalizedRelativeIntersectionX * Globals::MAX_BOUNCE_ANGLE_DEGREES;
-			velX = speed * cos(bounceAngle * PI / 180);
-			velY = speed * -sin(bounceAngle * PI / 180);
+			auto colliderName = collision->getName();
+
+			if (colliderName == "Paddle") {
+				// Location of the ball relative to the paddle
+				// PADDLE CENTRE X - BALL CENTRE X
+				//float relativeIntersectX = (colliderPos->x + (colliderPos->w / 2)) - (posRect->x + posRect->w / 2);
+				//// Normalizing the position (-1 -> 1)
+				//float normalizedRelativeIntersectionX = (relativeIntersectX / (colliderPos->w / 2));
+				//// Getting the new bounce angle by multiplying the position of the ball by the maximum possible value
+				//float bounceAngle = normalizedRelativeIntersectionX * Globals::MAX_BOUNCE_ANGLE_DEGREES;
+				//velX = speed * cos(bounceAngle * PI / 180);
+				//velY = speed * -sin(bounceAngle * PI / 180);
+				velY *= -1;
+			}
+			else if (colliderName == "WallRight" || colliderName == "WallLeft") {
+				velX *= -1;
+			}
+			else if (colliderName == "WallUp" || colliderName == "Tile") {
+				velY *= -1;
+			}
 
 		}
+		
+
 	}
 
 }

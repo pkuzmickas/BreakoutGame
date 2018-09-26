@@ -15,4 +15,5 @@ public:
 	~GameObject();
 	SDL_Rect* getPosRect();
 	Sprite* getSprite();
+	std::string getName();
 };

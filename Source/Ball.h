@@ -4,7 +4,7 @@
 class Ball : public GameObject {
 private:
 	std::string imgPath = "Assets/ball.png";
-	int speed = 500;
+	int speed = 700;
 	float posX;
 	float posY;
 	float velX = 0;

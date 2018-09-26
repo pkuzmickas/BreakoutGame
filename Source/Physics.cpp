@@ -2,14 +2,34 @@
 #include <iostream>
 #include "Globals.h"
 
+Physics::Physics() {
+	// Add 4 gameobjects for walls to the collider
+	SDL_Rect* wallLeftRect = new SDL_Rect({ -50, 0, 50, Globals::SCREEN_HEIGHT });
+	SDL_Rect* wallUpRect = new SDL_Rect({ 0, -50, Globals::SCREEN_WIDTH, 50 });
+	SDL_Rect* wallRightRect = new SDL_Rect({ Globals::SCREEN_WIDTH, 0, 50, Globals::SCREEN_HEIGHT });
+	SDL_Rect* wallDownRect = new SDL_Rect({ 0, Globals::SCREEN_HEIGHT, Globals::SCREEN_WIDTH, 50 });
+	wallLeft = new GameObject("WallLeft", wallLeftRect, NULL);
+	wallUp = new GameObject("WallRight", wallRightRect, NULL);
+	wallRight = new GameObject("WallUp", wallUpRect, NULL);
+	wallDown = new GameObject("WallDown", wallDownRect, NULL);
+
+	addCollider(wallLeft);
+	addCollider(wallUp);
+	addCollider(wallRight);
+	addCollider(wallDown);
+}
+
+Physics::~Physics() {
+	delete wallLeft;
+	delete wallUp;
+	delete wallDown;
+	delete wallRight;
+}
+
 // Checks if gameObject is colliding with any of the other colliders
 // Returns the object it collided with, or NULL if none
 GameObject* Physics::checkCollision(GameObject * gameObject) {
 	auto object1 = gameObject->getPosRect();
-
-	// Add 4 gameobjects for walls to the collider
-	// Remove them after this function
-
 
 	for (auto collider : colliders) {
 		if (collider == gameObject) continue;
@@ -40,3 +60,5 @@ bool Physics::removeCollider(GameObject * gameObject) {
 	std::cout << "Could not remove element from colliders" << std::endl;
 	return false;
 }
+
+

@@ -11,10 +11,14 @@ GameObject::GameObject(std::string name, SDL_Rect* posRect, Sprite * sprite) {
 }
 
 GameObject::~GameObject() {
-	delete sprite;
-	sprite = NULL;
-	delete posRect;
-	posRect = NULL;
+	if (sprite) {
+		delete sprite;
+		sprite = NULL;
+	}
+	if (posRect) {
+		delete posRect;
+		posRect = NULL;
+	}
 }
 
 SDL_Rect* GameObject::getPosRect() {
@@ -23,4 +27,8 @@ SDL_Rect* GameObject::getPosRect() {
 
 Sprite * GameObject::getSprite() {
 	return sprite;
+}
+
+std::string GameObject::getName() {
+	return name;
 }

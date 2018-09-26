@@ -22,5 +22,5 @@ public:
 	static const int MAX_COLUMNS = 8;
 	static const int MAX_ROWS = 6;
 	static const int BALL_SIZE = 25;
-	static const int MAX_BOUNCE_ANGLE_DEGREES = 75;
+	static const int MAX_BOUNCE_ANGLE_DEGREES = 30;
 };
