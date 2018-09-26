@@ -12,6 +12,8 @@ private:
 		LAUNCHED
 	};
 	BallState state = NOT_LAUNCHED;
+	class Paddle* paddle;
+	void resetBallLocation();
 public:
 	Ball(SDL_Renderer* renderer, class Paddle* paddle);
 	void update(float deltaTime);
