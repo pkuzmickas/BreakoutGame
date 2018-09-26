@@ -14,5 +14,6 @@ private:
 	bool gameRunning = false;
 	Graphics* graphics;
 	class Paddle* paddle = NULL;
+	class Ball* ball = NULL;
 	vector<class Tile*> tiles;
 };

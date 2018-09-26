@@ -1,6 +1,7 @@
 #include "BreakoutGame.h"
 #include "Globals.h"
 #include "Paddle.h"
+#include "Ball.h"
 #include "Tile.h"
 #include <fstream>
 #include <iostream>
@@ -12,6 +13,8 @@ BreakoutGame::BreakoutGame(SDL_Renderer* renderer) {
 	runTime = SDL_GetTicks();
 	paddle = new Paddle(renderer);
 	graphics->addToDraw(paddle);
+	ball = new Ball(renderer, paddle);
+	graphics->addToDraw(ball);
 
 	ifstream file("Assets/tiles.txt");
 	char tileHp;

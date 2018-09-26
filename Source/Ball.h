@@ -5,8 +5,13 @@ class Ball : public GameObject {
 private:
 	std::string imgPath = "Assets/ball.png";
 	int speed = 100;
-	int posX;
-	int posY;
+	float posX;
+	float posY;
+	enum BallState {
+		NOT_LAUNCHED,
+		LAUNCHED
+	};
+	BallState state = NOT_LAUNCHED;
 public:
 	Ball(SDL_Renderer* renderer, class Paddle* paddle);
 	void update(float deltaTime);

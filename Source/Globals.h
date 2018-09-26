@@ -18,4 +18,5 @@ public:
 	static const int SPACE_TOP = 75;
 	static const int MAX_COLUMNS = 8;
 	static const int MAX_ROWS = 6;
+	static const int BALL_SIZE = 25;
 };
