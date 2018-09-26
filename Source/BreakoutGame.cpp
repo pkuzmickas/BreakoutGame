@@ -87,7 +87,7 @@ void BreakoutGame::handleInput() {
 				ballCount = createText(ballCountTexture, new SDL_Rect({ Globals::SCREEN_WIDTH - w, Globals::SCREEN_HEIGHT - h, w, h }));
 				
 				std::string scoreText = SCORE_TEXT;
-				text = scoreText + to_string(score);
+				text = scoreText + to_string(scoreOnText);
 				SDL_Texture* scoreTexture = createTextTexture(Globals::BOTTOMTEXT_FONT_SIZE, text.c_str());
 				SDL_QueryTexture(scoreTexture, NULL, NULL, &w, &h);
 				scoreCount = createText(scoreTexture, new SDL_Rect({ 0, Globals::SCREEN_HEIGHT - h, w, h }));
@@ -121,7 +121,7 @@ void BreakoutGame::update() {
 		ball->update(deltaTime);
 
 		checkTiles();
-		checkBall();
+		checkStats();
 		break;
 	}
 	}
@@ -178,11 +178,12 @@ void BreakoutGame::checkTiles() {
 			graphics->removeFromDraw(tile);
 			physics->removeCollider(tile);
 			tile->setActive(false);
+			score++;
 		}
 	}
 }
 
-void BreakoutGame::checkBall() {
+void BreakoutGame::checkStats() {
 	int realBallsLeft = ball->getBallsLeft();
 	if (ballsLeft != realBallsLeft) {
 		ballsLeft = realBallsLeft;
@@ -190,6 +191,13 @@ void BreakoutGame::checkBall() {
 		std::string text = balls + to_string(ballsLeft);
 		ballCount->getSprite()->setTexture(createTextTexture(Globals::BOTTOMTEXT_FONT_SIZE, text.c_str()));
 	}
+	if (scoreOnText != score) {
+		scoreOnText = score;
+		std::string scoreText = SCORE_TEXT;
+		std::string text = scoreText + to_string(scoreOnText);
+		scoreCount->getSprite()->setTexture(createTextTexture(Globals::BOTTOMTEXT_FONT_SIZE, text.c_str()));
+	}
+
 }
 
 void BreakoutGame::restartGame() {

@@ -20,10 +20,11 @@ private:
 
 	int ballsLeft;
 	int score = 0;
+	int scoreOnText = 0;
 
 	void loadTilesFromFile(std::string path);
 	void checkTiles();
-	void checkBall();
+	void checkStats();
 	void restartGame();
 	SDL_Texture* createTextTexture(int fontSize, std::string text);
 	GameObject* createText(SDL_Texture* textTexture, SDL_Rect* posRect);

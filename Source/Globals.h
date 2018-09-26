@@ -3,8 +3,8 @@
 #include <SDL.h>
 
 #define PI 3.14159265
-#define ORANGE_TILE_PATH "Assets/orange.png"
-#define YELLOW_TILE_PATH "Assets/yellow.png"
+#define ORANGE_TILE_PATH "Assets/orange2.png"
+#define YELLOW_TILE_PATH "Assets/yellow2.png"
 #define TILE_FILE_PATH "Assets/tiles.txt"
 #define MENU_FILE_PATH "Assets/menu.png"
 #define BALL_FILE_PATH "Assets/ball2.png" 
