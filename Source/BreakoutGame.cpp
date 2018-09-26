@@ -3,6 +3,7 @@
 #include "Paddle.h"
 #include "Ball.h"
 #include "Tile.h"
+#include "Physics.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -10,10 +11,13 @@
 BreakoutGame::BreakoutGame(SDL_Renderer* renderer) {
 	this->renderer = renderer;
 	graphics = new Graphics(renderer);
+	physics = new Physics();
+
 	runTime = SDL_GetTicks();
 	paddle = new Paddle(renderer);
+	physics->addCollider(paddle);
 	graphics->addToDraw(paddle);
-	ball = new Ball(renderer, paddle);
+	ball = new Ball(renderer, paddle, physics);
 	graphics->addToDraw(ball);
 
 	loadTilesFromFile("Assets/tiles.txt");
@@ -25,6 +29,8 @@ BreakoutGame::~BreakoutGame() {
 	for (auto tile : tiles) {
 		delete tile;
 	}
+	delete ball;
+	delete physics;
 }
 
 void BreakoutGame::runGame() {
@@ -95,6 +101,7 @@ void BreakoutGame::loadTilesFromFile(std::string path) {
 			Tile* tile = new Tile(renderer, col * Globals::TILE_WIDTH, Globals::SPACE_TOP + row * Globals::TILE_HEIGHT, hp);
 			tiles.push_back(tile);
 			graphics->addToDraw(tile);
+			physics->addCollider(tile);
 		}
 		file.close();
 	}

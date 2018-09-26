@@ -15,6 +15,7 @@ private:
 	Graphics* graphics;
 	class Paddle* paddle = NULL;
 	class Ball* ball = NULL;
+	class Physics* physics = NULL;
 	vector<class Tile*> tiles;
 
 	void loadTilesFromFile(std::string path);

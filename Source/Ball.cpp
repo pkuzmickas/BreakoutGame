@@ -1,6 +1,8 @@
 #include "Ball.h"
 #include "Paddle.h"
 #include "Globals.h"
+#include "Physics.h"
+#include <math.h>
 #include <iostream>
 using namespace std;
 
@@ -11,12 +13,13 @@ void Ball::resetBallLocation() {
 	posRect->y = (int)posY;
 }
 
-Ball::Ball(SDL_Renderer * renderer, Paddle* paddle) {
+Ball::Ball(SDL_Renderer * renderer, Paddle* paddle, Physics* physics) {
 	if (!paddle) {
 		cout << "Paddle has to be initialized before the ball can be created!" << endl;
 		return;
 	}
 	this->paddle = paddle;
+	this->physics = physics;
 	name = "Ball";
 	posRect = new SDL_Rect();
 	posRect->h = Globals::BALL_SIZE;
@@ -27,7 +30,48 @@ Ball::Ball(SDL_Renderer * renderer, Paddle* paddle) {
 }
 
 void Ball::update(float deltaTime) {
+
+	std::vector<SDL_Event> events = Globals::GetFrameEvents();
+	//std::cout << "EVENT SIZE IN PLAYER INPUT:" << events.size() << std::endl;
+	for (auto e : events) {
+		switch (e.type) {
+
+		case SDL_MOUSEBUTTONDOWN: {
+			if (state == NOT_LAUNCHED) {
+				state = LAUNCHED;
+				velX = speed * 0.3;
+				velY = -speed * 0.7;
+			}
+		}
+			break;
+		}
+	}
+
+
 	if (state == NOT_LAUNCHED) {
 		resetBallLocation();
 	}
+	else if (state == LAUNCHED) {
+		posX += velX * deltaTime;
+		posY += velY * deltaTime;
+		posRect->x = (int)posX;
+		posRect->y = (int)posY;
+		auto collision = physics->checkCollision(this);
+		if (collision) {
+			SDL_Rect* colliderPos = collision->getPosRect();
+			// Location of the ball relative to the paddle
+			// PADDLE CENTRE X - BALL CENTRE X
+			float relativeIntersectX = (colliderPos->x + (colliderPos->w / 2)) - (posRect->x + posRect->w / 2);
+			// Normalizing the position (-1 -> 1)
+			float normalizedRelativeIntersectionX = (relativeIntersectX / (colliderPos->w / 2));
+			// Getting the new bounce angle by multiplying the position of the ball by the maximum possible value
+			float bounceAngle = normalizedRelativeIntersectionX * Globals::MAX_BOUNCE_ANGLE_DEGREES;
+			velX = speed * cos(bounceAngle * PI / 180);
+			velY = speed * -sin(bounceAngle * PI / 180);
+
+		}
+	}
+
 }
+
+
