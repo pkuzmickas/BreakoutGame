@@ -13,6 +13,8 @@ private:
 	class Paddle* paddle;
 	class Physics* physics;
 	void resetBallLocation();
+	SDL_Renderer* renderer;
+	bool isColorBright = false;
 public:
 	Ball(SDL_Renderer* renderer, class Paddle* paddle, class Physics* physics);
 	void update(float deltaTime);

@@ -15,6 +15,7 @@
 #define BALLS_TEXT "Balls: "
 #define SCORE_TEXT "Score: "
 #define NK_FONT "Assets/CAMPUS.ttf"
+#define BALL_FILE_PATH2 "Assets/ball3.png"
 
 class Globals {
 public:

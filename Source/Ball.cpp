@@ -19,6 +19,7 @@ Ball::Ball(SDL_Renderer * renderer, Paddle* paddle, Physics* physics) {
 		cout << "Paddle has to be initialized before the ball can be created!" << endl;
 		return;
 	}
+	this->renderer = renderer;
 	this->paddle = paddle;
 	this->physics = physics;
 	ballsLeft = Globals::MAX_BALLS;
@@ -80,6 +81,15 @@ void Ball::update(float deltaTime) {
 
 			SDL_Rect* colliderPos = collision->getPosRect();
 			auto colliderName = collision->getName();
+
+			if (isColorBright) {
+				isColorBright = false;
+				getSprite()->setTexture(renderer, BALL_FILE_PATH);
+			}
+			else {
+				isColorBright = true;
+				getSprite()->setTexture(renderer, BALL_FILE_PATH2);
+			}
 
 			if (colliderName == "Paddle") {
 				// Location of the ball relative to the paddle
