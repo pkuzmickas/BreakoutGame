@@ -7,9 +7,10 @@ class Graphics {
 private:
 	SDL_Renderer* renderer;
 	vector<GameObject*> drawQueue;
+	GameObject* logo = NULL;
 public:
 	Graphics(SDL_Renderer* renderer);
 	void draw();
-	void addToDraw(GameObject* gameObject);
+	void addToDraw(GameObject* gameObject, bool isLogo = false);
 	bool removeFromDraw(GameObject* gameObject);
 };

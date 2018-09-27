@@ -84,13 +84,19 @@ void Ball::update(float deltaTime) {
 			if (colliderName == "Paddle") {
 				// Location of the ball relative to the paddle
 				// PADDLE CENTRE X - BALL CENTRE X
-				//float relativeIntersectX = (colliderPos->x + (colliderPos->w / 2)) - (posRect->x + posRect->w / 2);
+				//float relativeIntersectX = (posRect->x + posRect->w / 2) - (colliderPos->x + (colliderPos->w / 2)) ;
 				//// Normalizing the position (-1 -> 1)
 				//float normalizedRelativeIntersectionX = (relativeIntersectX / (colliderPos->w / 2));
-				//// Getting the new bounce angle by multiplying the position of the ball by the maximum possible value
+				// //Getting the new bounce angle by multiplying the position of the ball by the maximum possible value
 				//float bounceAngle = normalizedRelativeIntersectionX * Globals::MAX_BOUNCE_ANGLE_DEGREES;
-				//velX = speed * cos(bounceAngle * PI / 180);
-				//velY = speed * -sin(bounceAngle * PI / 180);
+				//
+				////auto bounceAngle = relativeIntersectX / (PI / 3);
+				//velX = speed * cos(bounceAngle * PI/180);
+				//velY = speed * sin(bounceAngle * PI/180);
+
+				
+				// 3 AM, something's wrong with my maths, can't figure it out now, simple solution below
+
 				velY *= -1;
 			}
 			else if (colliderName == "WallRight" || colliderName == "WallLeft") {
@@ -105,7 +111,6 @@ void Ball::update(float deltaTime) {
 			else if (colliderName == "WallDown") {
 				ballsLeft--;
 				restartBall();
-				// out of bounds flag
 			}
 
 		}
@@ -121,6 +126,10 @@ void Ball::restartBall() {
 
 int Ball::getBallsLeft() {
 	return ballsLeft;
+}
+
+void Ball::resetBalls() {
+	ballsLeft = Globals::MAX_BALLS;
 }
 
 

@@ -5,7 +5,11 @@ Graphics::Graphics(SDL_Renderer * renderer) {
 
 }
 
-void Graphics::addToDraw(GameObject* gameObject) {
+void Graphics::addToDraw(GameObject* gameObject, bool isLogo) {
+	if (isLogo) { // To make sure we always draw it on top
+		logo = gameObject; 
+		return;
+	}
 	if (gameObject) {
 		drawQueue.push_back(gameObject);
 	}
@@ -15,6 +19,10 @@ void Graphics::addToDraw(GameObject* gameObject) {
 }
 
 bool Graphics::removeFromDraw(GameObject * gameObject) {
+	if (gameObject == logo) {
+		logo = NULL;
+		return true; 
+	}
 	for (int i = 0; i < (int)drawQueue.size(); i++) {
 		if (drawQueue[i] == gameObject) {
 			// Swaps the element with the matching name with the last one in the vector and then pops the vector
@@ -33,6 +41,8 @@ void Graphics::draw() {
 	for (auto gameObject : drawQueue) {
 		SDL_RenderCopy(renderer, gameObject->getSprite()->getTexture(), gameObject->getSprite()->getSrcRect(), gameObject->getPosRect());
 	}
-	
+	if (logo) {
+		SDL_RenderCopy(renderer, logo->getSprite()->getTexture(), logo->getSprite()->getSrcRect(), logo->getPosRect());
+	}
 	SDL_RenderPresent(renderer);
 }

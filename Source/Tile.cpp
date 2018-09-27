@@ -28,6 +28,13 @@ void Tile::tileHit() {
 
 void Tile::fullHp() {
 	hpLeft = hpTotal;
+	if (hpTotal == 2) {
+		getSprite()->setTexture(renderer, ORANGE_TILE_PATH);
+	}
+	else if (hpTotal == 1) {
+		getSprite()->setTexture(renderer, YELLOW_TILE_PATH);
+	}
+	//change img as well
 }
 
 int Tile::getHpTotal() {

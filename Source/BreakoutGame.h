@@ -26,16 +26,21 @@ private:
 	void checkTiles();
 	void checkStats();
 	void restartGame();
-	SDL_Texture* createTextTexture(int fontSize, std::string text);
+	SDL_Texture* createTextTexture(const char* fontPath, int fontSize, std::string text, SDL_Color color);
 	GameObject* createText(SDL_Texture* textTexture, SDL_Rect* posRect);
 
 	enum GameState {
 		MENU,
-		PLAYING
+		PLAYING,
+		OVER
 	};
 
 	GameState gameState = MENU;
-	GameObject* menuScreen = NULL;
+	/*GameObject* menuScreen = NULL;
+	GameObject* loseScreen = NULL;*/
+	GameObject* resultScreen = NULL;
 	GameObject* ballCount = NULL;
 	GameObject* scoreCount = NULL;
+	GameObject* scoreCountLoseScreen = NULL;
+	GameObject* nkLogo = NULL;
 };

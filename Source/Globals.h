@@ -10,8 +10,11 @@
 #define BALL_FILE_PATH "Assets/ball2.png" 
 #define PADDLE_FILE_PATH "Assets/paddle2.png"
 #define FONT_FILE_PATH "Assets/bgothm.ttf"
+#define LOSE_FILE_PATH "Assets/lose.png"
+#define WIN_FILE_PATH "Assets/win.png"
 #define BALLS_TEXT "Balls: "
 #define SCORE_TEXT "Score: "
+#define NK_FONT "Assets/CAMPUS.ttf"
 
 class Globals {
 public:
@@ -32,7 +35,7 @@ public:
 	static const int MAX_COLUMNS = 8;
 	static const int MAX_ROWS = 6;
 	static const int BALL_SIZE = 25;
-	static const int MAX_BOUNCE_ANGLE_DEGREES = 30;
+	static const int MAX_BOUNCE_ANGLE_DEGREES = 60;
 	static const int MAX_BALLS = 3;
 	static const int BOTTOMTEXT_FONT_SIZE = 18;
 	

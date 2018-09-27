@@ -8,7 +8,7 @@ private:
 
 	bool movingLeft = false;
 	bool movingRight = false;
-	int movementSpeed = 500;
+	int movementSpeed = 600;
 public:
 	Paddle(SDL_Renderer* renderer);
 	void update(float deltaTime);

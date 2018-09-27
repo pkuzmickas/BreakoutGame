@@ -3,7 +3,7 @@
 
 class Ball : public GameObject {
 private:
-	int speed = 700;
+	int speed = 750;
 	float posX;
 	float posY;
 	float velX = 0;
@@ -18,4 +18,5 @@ public:
 	void update(float deltaTime);
 	void restartBall();
 	int getBallsLeft();
+	void resetBalls();
 };
